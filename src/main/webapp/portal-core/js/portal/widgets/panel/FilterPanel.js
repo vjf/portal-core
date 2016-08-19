@@ -169,7 +169,7 @@ Ext.define('portal.widgets.panel.FilterPanel', {
                             id          : winId,
                             title       : 'Legend: '+ layer.get('name'),
                             layout      : 'fit',
-                            width       : 200,
+                            width       : 250,
                             height      : 300,
                             items: form
                         });
@@ -290,6 +290,14 @@ Ext.define('portal.widgets.panel.FilterPanel', {
      * of renderers/layers to listen for filterer updates.
      */
     _onAddLayer : function() {
+        
+        // If using a narrow width device, then collapse the LHS panel
+        if (typeof window.innerWidth != 'undefined' && window.innerWidth < 800) {
+            var s = Ext.ComponentQuery.query('#west_panel');
+            if (typeof s === 'object' && s.length>0) {
+                s[0].collapse(Ext.Component.DIRECTION_LEFT, false);
+            }
+        }
 
         var layer = this.filterForm.layer;    
         

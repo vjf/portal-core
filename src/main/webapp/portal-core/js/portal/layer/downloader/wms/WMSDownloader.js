@@ -44,8 +44,8 @@ Ext.define('portal.layer.downloader.wms.WMSDownloader', {
         Ext.create('Ext.Window', {
             title : 'Download Options',
             buttonAlign : 'right',
-            width : 300,
-            height : 150,
+            maxWidth : 300,
+            //height : 150,
             layout : {
                 type : 'vbox',
                 align : 'stretch'

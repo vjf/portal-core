@@ -245,6 +245,13 @@ Ext.define('portal.widgets.panel.CommonBaseRecordPanel', {
      * On single click, show a highlight of all BBoxes
      */
     _spatialBoundsClickHandler : function(value, record) {
+        // If using a narrow width device, then collapse the LHS panel
+        if (typeof window.innerWidth != 'undefined' && window.innerWidth < 800) {
+            var s = Ext.ComponentQuery.query('#west_panel');
+            if (typeof s === 'object' && s.length>0) {
+                s[0].collapse(Ext.Component.DIRECTION_LEFT, false);
+            }
+        }
         var spatialBoundsArray;
         if (record.internalId == 'portal-InSar-reports') {
             spatialBoundsArray = this.getWholeGlobeBounds();
@@ -296,6 +303,13 @@ Ext.define('portal.widgets.panel.CommonBaseRecordPanel', {
      * On double click, move the map so that specified bounds are visible
      */
     _spatialBoundsDoubleClickHandler : function(value, record) {
+        // If using a narrow width device, then collapse the LHS panel
+        if (typeof window.innerWidth != 'undefined' && window.innerWidth < 800) {
+            var s = Ext.ComponentQuery.query('#west_panel');
+            if (typeof s === 'object' && s.length>0) {
+                s[0].collapse(Ext.Component.DIRECTION_LEFT, false);
+            }
+        }
         var spatialBoundsArray;
         if (record.internalId == 'portal-InSar-reports') {
             spatialBoundsArray = this.getWholeGlobeBounds();
@@ -346,11 +360,16 @@ Ext.define('portal.widgets.panel.CommonBaseRecordPanel', {
         if(layer){
             var renderer = layer.get('renderer');
             html =  renderer.renderStatus.renderHtml();
-        }        
+        }
+        var windowWidth = 500;
+        if (typeof window.innerWidth != 'undefined' && window.innerWidth < 500) {
+            windowWidth = window.innerWidth - 20;
+        }
+            
         var win = Ext.create('Ext.window.Window', {
             title: 'Service Loading Status',
-            height: 200,
-            width: 500,
+            //height: 200,
+            width: windowWidth,
             layout: 'fit',
             items: {  // Let's put an empty grid in just to illustrate fit layout
                 xtype: 'panel',

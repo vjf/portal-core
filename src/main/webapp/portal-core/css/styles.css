@@ -36,13 +36,61 @@
         width: 531px;
     }
 
-    #logo h1 a {
-        padding: 0;
-        margin: 0;
-        width: 531px;
-        height: 100px;
-        display: block;
-        background: url( "../img/img-auscope-banner.gif" ) no-repeat top left;
+    /* Small width */
+    @media all and (max-width: 800px) {
+        #header-container {
+            height: 50px;
+        }
+        #logo  {
+            height: 50px;
+        }
+        
+        #logo h1 a {
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            
+            display: block;
+            /*background: url( "../img/img-auscope-banner-mini.gif" ) no-repeat top left;*/
+        }
+        
+        #auscope-banner-mini {
+            display: block;
+            opacity: 0.6;
+            height: 50px;
+        }
+        
+        #auscope-banner {
+            display: none;
+        }
+        
+        #auscope-self-link {
+            display: none;
+        }
+    }
+    
+    /* Larger width */
+    @media all and (min-width: 800px) {
+        #logo h1 a {
+            padding: 0;
+            margin: 0;
+            width: 531px;
+            height: 100px;
+            display: block;
+            background: url( "../img/img-auscope-banner.gif" ) no-repeat top left;
+        }
+        
+        #auscope-banner-mini {
+            display: none;
+        }
+        
+        #auscope-banner {
+            display: block;
+        }
+        
+        #auscope-self-link {
+            display: block;
+        }
     }
 
     #logo h1 a span {
@@ -113,4 +161,18 @@
     }
     .x-grid3-dirty-cell {
         background-image:none ! important;
+    }
+    
+    
+    .x-form-display-field-default {
+        margin-top: 0px;
+        font-family: tahoma, arial, helvetica, verdana, sans-serif;
+        font-size: 12px;
+        line-height: 16px;
+    }
+    
+    .x-form-item-label-default {
+        font-family: tahoma, arial, helvetica, verdana, sans-serif;
+        font-size: 12px;
+        line-height: 16px;
     }

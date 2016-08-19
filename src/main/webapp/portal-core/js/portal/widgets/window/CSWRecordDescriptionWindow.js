@@ -15,13 +15,20 @@ Ext.define('portal.widgets.window.CSWRecordDescriptionWindow', {
     constructor : function(cfg) {
         var cswRecords = cfg.cswRecords;
         var parentRecord = cfg.parentRecord;
-        var onlineResourcePanelType = cfg.onlineResourcePanelType || 'onlineresourcepanel';        
+        var onlineResourcePanelType = cfg.onlineResourcePanelType || 'onlineresourcepanel';
+
+        var windowWidth = 830;
+        if (typeof window.innerWidth != 'undefined' && window.innerWidth < 850) {
+            windowWidth = window.innerWidth - 20;
+        }
+        
+        
 
         //Set our default values (if they haven't been set)
         Ext.applyIf(cfg, {
             title: 'Service Information',
             autoDestroy : true,
-            width : 830,
+            width : windowWidth,
             maxHeight : 400,
             minHeight : 100
         });

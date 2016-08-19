@@ -41,8 +41,8 @@ Ext.define('portal.layer.downloader.wfs.WFSDownloader', {
         Ext.create('Ext.Window', {
             title : 'Download Options',
             buttonAlign : 'right',
-            width : 550,
-            height : 200,
+            maxWidth : 550,
+            //height : 200,
             layout : {
                 type : 'anchor'
                 //align : 'stretch'
@@ -146,10 +146,24 @@ Ext.define('portal.layer.downloader.wfs.WFSDownloader', {
 
     _configureImageClickHandlers : function(c, eOpts, bbox) {
         var fireRender = function(bbox) {
+            // If using a narrow width device, then collapse the LHS panel
+            if (typeof window.innerWidth != 'undefined' && window.innerWidth < 800) {
+                var s = Ext.ComponentQuery.query('#west_panel');
+                if (typeof s === 'object' && s.length>0) {
+                    s[0].collapse(Ext.Component.DIRECTION_LEFT, false);
+                }
+            }
             this.map.highlightBounds(bbox);
         };
 
         var fireScroll = function(bbox) {
+            // If using a narrow width device, then collapse the LHS panel
+            if (typeof window.innerWidth != 'undefined' && window.innerWidth < 800) {
+                var s = Ext.ComponentQuery.query('#west_panel');
+                if (typeof s === 'object' && s.length>0) {
+                    s[0].collapse(Ext.Component.DIRECTION_LEFT, false);
+                }
+            }
             this.map.scrollToBounds(bbox);
         };
 

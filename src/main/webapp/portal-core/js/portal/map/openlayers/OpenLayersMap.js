@@ -348,28 +348,48 @@ Ext.define('portal.map.openlayers.OpenLayersMap', {
         //VT: manually set the id.
         var containerId = divId;
         var me = this;
+        var naviControl;
+        
+        // Mobile phone?
+        if (typeof window.innerWidth != 'undefined' && window.innerWidth < 800) {
+            naviControl = new OpenLayers.Control.TouchNavigation();
+        } else {
+            naviControl = new OpenLayers.Control.Navigation();
+        }
 
         this.map = new OpenLayers.Map({
             div: containerId,
             projection: 'EPSG:3857',
             controls : [
-                new OpenLayers.Control.Navigation(),
+                naviControl,
                 new OpenLayers.Control.PanZoomBar({zoomStopHeight:8}),
                 new OpenLayers.Control.MousePosition({
                     "numDigits": 2,
                     displayProjection: new OpenLayers.Projection("EPSG:4326"),
                     prefix: '<a target="_blank" href="http://spatialreference.org/ref/epsg/4326/">Map coordinates (WGS84 decimal degrees)</a>: ' ,
+                    narrow_prefix: '<a target="_blank" href="http://spatialreference.org/ref/epsg/4326/">WGS84 Coords</a>: ' ,
                     suffix : ' / lat lng',
-                    emptyString : '<a target="_blank" href="http://spatialreference.org/ref/epsg/4326/">Map coordinates (WGS84 decimal degrees): </a> Out of bound',
+                    emptyString : '', //'<a target="_blank" href="http://spatialreference.org/ref/epsg/4326/">Map coordinates (WGS84 decimal degrees): </a> Out of bound',
                     element : Ext.get('latlng').dom,
                     formatOutput: function(lonLat) {
                         var digits = parseInt(this.numDigits);
-                        var newHtml =
-                            this.prefix +
-                            lonLat.lat.toFixed(digits) +
-                            this.separator +
-                            lonLat.lon.toFixed(digits) +
-                            this.suffix;
+                        var newHtml;
+                        // Adapt text to narrow screen width
+                        if (typeof window.innerWidth != 'undefined' && window.innerWidth < 800) {
+                            newHtml =
+                                this.narrow_prefix +
+                                lonLat.lat.toFixed(digits) +
+                                this.separator +
+                                lonLat.lon.toFixed(digits) +
+                                this.suffix;
+                        } else {
+                            newHtml =
+                                this.prefix +
+                                lonLat.lat.toFixed(digits) +
+                                this.separator +
+                                lonLat.lon.toFixed(digits) +
+                                this.suffix;
+                        }
                         return newHtml;
                      }
                 })
@@ -423,7 +443,7 @@ Ext.define('portal.map.openlayers.OpenLayersMap', {
         var customNavToolBar = OpenLayers.Class(OpenLayers.Control.NavToolbar, {
             initialize: function(options) {
                 OpenLayers.Control.Panel.prototype.initialize.apply(this, [options]);
-                this.addControls([panCtrl, zoomBoxCtrl])
+                this.addControls([panCtrl, zoomBoxCtrl]);
             }
         });
 
@@ -505,7 +525,6 @@ Ext.define('portal.map.openlayers.OpenLayersMap', {
 
             this.map.addControl(panel);
         }
-
         //Finally listen for resize events on the parent container so we can pass the details
         //on to Openlayers.
         container.on('resize', function() {
@@ -561,7 +580,10 @@ Ext.define('portal.map.openlayers.OpenLayersMap', {
             }
             
             this.map.addControl(this.layerSwitcher);
-            this.layerSwitcher.maximizeControl();
+            // Minimise control for smaller screens
+            if (typeof window.innerWidth != 'undefined' && window.innerWidth > 800) {
+                this.layerSwitcher.maximizeControl();
+            }
         }
     },
     
@@ -655,7 +677,6 @@ Ext.define('portal.map.openlayers.OpenLayersMap', {
             map : this.map,
             trigger : Ext.bind(this._onClick, this)
         });
-                
         var controlList = this.map.getControlsByClass('portal.map.openlayers.ClickControl');
                 
         //VT: update the map clickControl with the updated layer

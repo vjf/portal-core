@@ -27,7 +27,7 @@ portal.map.openlayers.FeatureWithLocationHandler = OpenLayers.Class(OpenLayers.H
         //   by calculating the distance between mousedown and mouseup position.
         if (!handled) {
             var type = event.type;
-            if (type === 'click' && !this.mouseDragFlag) {
+            if (type == 'touchstart' || type === 'click' && !this.mouseDragFlag) { // Added touchstart for mobile phones
                 handled = true;            	
                 this.callback('click', [null, event]);                
             } else if (type === 'mousedown') {

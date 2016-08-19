@@ -69,7 +69,7 @@ Ext.define('portal.layer.downloader.wfs.KLWFSDownloader', {
             buttonAlign : 'right',
             modal : true,
             border : '1 1 0 1',
-            width : 570,
+            maxWidth : 570,
             layout : {
                 type : 'anchor'
                 //align : 'stretch'
@@ -274,10 +274,24 @@ Ext.define('portal.layer.downloader.wfs.KLWFSDownloader', {
 
     _configureImageClickHandlers : function(c, eOpts, bbox) {
         var fireRender = function(bbox) {
+            // If using a narrow width device, then collapse the LHS panel
+            if (typeof window.innerWidth != 'undefined' && window.innerWidth < 800) {
+                var s = Ext.ComponentQuery.query('#west_panel');
+                if (typeof s === 'object' && s.length>0) {
+                    s[0].collapse(Ext.Component.DIRECTION_LEFT, false);
+                }
+            }
             this.map.highlightBounds(bbox);
         };
 
         var fireScroll = function(bbox) {
+            // If using a narrow width device, then collapse the LHS panel
+            if (typeof window.innerWidth != 'undefined' && window.innerWidth < 800) {
+                var s = Ext.ComponentQuery.query('#west_panel');
+                if (typeof s === 'object' && s.length>0) {
+                    s[0].collapse(Ext.Component.DIRECTION_LEFT, false);
+                }
+            }
             this.map.scrollToBounds(bbox);
         };
 

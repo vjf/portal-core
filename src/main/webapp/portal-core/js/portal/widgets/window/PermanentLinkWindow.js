@@ -43,7 +43,7 @@ Ext.define('portal.widgets.window.PermanentLinkWindow', {
             title: 'Permanent Link',
             autoDestroy : true,
             modal : true,
-            width : 500,
+            width : 300,
             autoHeight : true,
             items : [{
                 xtype : 'panel',

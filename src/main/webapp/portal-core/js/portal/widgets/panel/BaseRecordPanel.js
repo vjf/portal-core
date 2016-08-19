@@ -395,11 +395,15 @@ Ext.define('portal.widgets.panel.BaseRecordPanel', {
         if(layer){
             var renderer = layer.get('renderer');
             html =  renderer.renderStatus.renderHtml();
-        }        
+        }
+        var windowWidth = 500;
+        if (typeof window.innerWidth != 'undefined' && window.innerWidth < 500) {
+            windowWidth = window.innerWidth - 50;
+        }
         var win = Ext.create('Ext.window.Window', {
             title: 'Service Loading Status',
-            height: 200,
-            width: 500,
+            width: windowWidth,
+            //height: 200,
             layout: 'fit',
             items: {  // Let's put an empty grid in just to illustrate fit layout
                 xtype: 'panel',
