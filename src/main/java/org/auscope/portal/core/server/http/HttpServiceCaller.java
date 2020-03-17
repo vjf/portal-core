@@ -24,10 +24,13 @@ import org.apache.http.conn.HttpClientConnectionManager;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 
+import org.springframework.stereotype.Component;
+
 
 /**
  * Utility class used to call web service end points.
  */
+@Component
 public class HttpServiceCaller {
     /**
      * The maximum amount of bytes (from a POST) that will be logged

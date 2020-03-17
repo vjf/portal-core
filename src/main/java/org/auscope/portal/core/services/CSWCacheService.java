@@ -15,6 +15,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Executor;
+import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -43,6 +45,7 @@ import com.esotericsoftware.kryo.Kryo;
  * @author Josh Vote
  *
  */
+@Component
 public class CSWCacheService {
 
     /**
@@ -106,6 +109,7 @@ public class CSWCacheService {
      * @param cswServiceList
      *            Must be an untyped array of CSWServiceItem objects (for bean autowiring) representing CSW URL endpoints
      */
+    @Autowired
     public CSWCacheService(Executor executor,
             HttpServiceCaller serviceCaller,
             @SuppressWarnings("rawtypes") ArrayList cswServiceList) {

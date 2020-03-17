@@ -12,6 +12,7 @@ import org.auscope.portal.core.view.ViewCSWRecordFactory;
 import org.auscope.portal.core.view.ViewKnownLayerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Component;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -20,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @version $Id: CSWCacheController.java 1863 2011-08-08 07:55:42Z JoshVote $
  */
 @Controller
+@Component
 public class CSWCacheController extends BaseCSWController {
     private CSWCacheService cswService;
 
