@@ -4,7 +4,6 @@ package org.auscope.portal.core.server.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -49,7 +48,7 @@ public class KnownLayerController extends BaseCSWController {
      *
      * @return
      */
-    @GetMapping("getKnownLayers.do")
+    @RequestMapping("getKnownLayers.do")
     public ModelAndView getKnownLayers() {
         KnownLayerGrouping grouping = knownLayerService.groupKnownLayerRecords();
         if (nagios4CachedService != null) {
@@ -66,7 +65,7 @@ public class KnownLayerController extends BaseCSWController {
      *
      * @return
      */
-    @GetMapping("getUnmappedCSWRecords.do")
+    @RequestMapping("getUnmappedCSWRecords.do")
     public ModelAndView getUnmappedCSWRecords() {
         KnownLayerGrouping grouping = knownLayerService.groupKnownLayerRecords();
 

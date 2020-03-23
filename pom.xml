@@ -178,44 +178,6 @@
                 </configuration>
             </plugin>
             <plugin>
-              <groupId>com.samaxes.maven</groupId>
-              <artifactId>minify-maven-plugin</artifactId>
-              <version>1.7.4</version>
-              <executions>
-                <execution>
-                  <id>default-minify</id>
-                  <configuration>
-                    <charset>UTF-8</charset>
-                    <!-- css bit -->
-                    <cssSourceDir>portal-core/css/</cssSourceDir>
-                    <jsTargetDir>../classes/portal-core/css</jsTargetDir>
-                    <cssSourceIncludes>
-                      <cssSourceInclude>**/*.css</cssSourceInclude>
-                    </cssSourceIncludes>
-                    <cssSourceExcludes>
-                      <cssSourceExclude>**/*.min.css</cssSourceExclude>
-                    </cssSourceExcludes>
-                    <cssFinalFile>portal-core-all.css</cssFinalFile>
-                    <!-- javascript bit -->
-                    <jsSourceDir>portal-core/js/portal/</jsSourceDir>
-                    <jsTargetDir>../classes/portal-core/js/portal</jsTargetDir>
-                    <jsSourceIncludes>
-                      <jsSourceInclude>**/*.js</jsSourceInclude>
-                    </jsSourceIncludes>
-                    <jsSourceExcludes>
-                      <jsSourceExclude>**/*.min.js</jsSourceExclude>
-                    </jsSourceExcludes>
-                    <jsFinalFile>portal-core-all.js</jsFinalFile>
-                    <jsEngine>CLOSURE</jsEngine>
-                    <closureSortDependencies>true</closureSortDependencies>
-                  </configuration>
-                  <goals>
-                    <goal>minify</goal>
-                  </goals>
-                </execution>
-              </executions>
-            </plugin>
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
                 <version>2.14</version>
@@ -223,25 +185,6 @@
                     <configLocation>checkstyle.xml</configLocation>
                     <cacheFile>checkstyle.cache</cacheFile>
                 </configuration>
-            </plugin>
-            <!-- This builds our GUI release plugin -->
-            <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <version>2.5.3</version>
-                <configuration>
-                    <descriptors>
-                        <descriptor>src/assembly/webapp.xml</descriptor>
-                    </descriptors>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>make-assembly</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
             <!-- This bundles our webresources into the output JAR-->
             <plugin>
